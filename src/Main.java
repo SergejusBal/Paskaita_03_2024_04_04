@@ -6,11 +6,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        /////////////////////////////////////////////
-        // Užduotis 6/1
+        //////////////////////////////////////////////////////////////////////////////////
 
         System.out.println();
-        System.out.println("Užduotis 6");
+        System.out.println("Pratimai");
         System.out.println();
 
         Mokinys jonas = new Mokinys("Jonas","Betra",new int[]{7,3,8});
@@ -47,8 +46,8 @@ public class Main {
         System.out.println(vidurkiai.last()-vidurkiai.first());
 
 
-        /////////////////////////////////////////////
-        // Užduotis method 3? skaiciai
+        //////////////////////////////////////////////////////////////////////////////////
+        // Užduotis method 3 skaiciai
 
         ArrayList<Double> skaiciai = new ArrayList<Double>();
         ArrayList<Double> skaiciai2 = new ArrayList<Double>();
@@ -89,8 +88,8 @@ public class Main {
         System.out.println();
 
 
-        /////////////////////////////////////////////
-        // Užduotis methods nr1
+        //////////////////////////////////////////////////////////////////////////////////
+        // Užduotis methods 1
 
         System.out.println();
         System.out.println("Užduotis methods nr1");
@@ -122,8 +121,8 @@ public class Main {
 
         }
 
-        /////////////////////////////////////////////
-        // Užduotis methods nr2
+        //////////////////////////////////////////////////////////////////////////////////
+        // Užduotis methods 2
 
         System.out.println();
         System.out.println("Užduotis methods nr2");
@@ -141,8 +140,8 @@ public class Main {
         for(Darbuotojas d : darbuotojai) System.out.println(""+d.gimimoMetai().getYear() + " " + d.gimimoMetai().getMonth() + " " + d.gimimoMetai().getDay());
 
 
-        /////////////////////////////////////////////
-        // Užduotis methods nr4
+        //////////////////////////////////////////////////////////////////////////////////
+        // Užduotis methods 4
 
         System.out.println();
         System.out.println("Užduotis methods nr4");
@@ -172,13 +171,60 @@ public class Main {
         System.out.println("Užduotis KidCalculator");
         System.out.println();
 
-        int verte1 = KidsCalculator.sudeti(random.nextInt(1,9),random.nextInt(1,9));
-        int verte2 = KidsCalculator.atimti(random.nextInt(1,9),random.nextInt(1,9));
+        boolean skaicioti = false;
+
+        KidsCalculator kidsCalculator = new KidsCalculator();
+
+        System.out.println("Ar norite atlikti aritmetinius veikmus?");
+        skaicioti = kidsCalculator.Atsakymas();
+
+        while(skaicioti){
+
+            int sk1 = kidsCalculator.Skaicius();
+            String op = kidsCalculator.Zenklas();
+            int sk2 = kidsCalculator.Skaicius();
+
+            switch (op){
+                case "-": kidsCalculator.atimti(sk1, sk2);
+                break;
+                case "+": kidsCalculator.sudeti(sk1, sk2);
+                break;
+                case "*": kidsCalculator.dauginti(sk1, sk2);
+                break;
+                case "/": kidsCalculator.dalinti(sk1, sk2);
+                break;
+            }
+            System.out.println("Ar norite atlikti aritmetinius veikmus?");
+            skaicioti= kidsCalculator.Atsakymas();
+        }
+
+        System.out.println("Ar norite rasti dydziaisia skaiciu:");
+        skaicioti = kidsCalculator.Atsakymas();
+
+        while (skaicioti){
+            System.out.println("Iveskite kiek skaicius norite lyginti");
+            int sklyg = kidsCalculator.Skaicius();
+            int [] visiSkaiciai = new int[sklyg];
+            for(int i = 0 ; i<sklyg; i++) visiSkaiciai[i] = kidsCalculator.Skaicius();
+            int dydskaicius = visiSkaiciai[0];
+            System.out.println("Ivesti skaiciai:");
+            for(int i = 0 ; i<sklyg; i++) {
+                System.out.print(visiSkaiciai[i] + " ");
+                if(dydskaicius<visiSkaiciai[i]) dydskaicius = visiSkaiciai[i];
+            }
+
+            System.out.println();
+            System.out.println("Didziusias skaicius yra: " + dydskaicius);
 
 
+            System.out.println("Ar norite rasti dydziaisia skaiciu:");
+            skaicioti = kidsCalculator.Atsakymas();
+        }
 
 
     }
+
+
 
     public static boolean lyginti(Darbuotojas dr1,Darbuotojas dr2){
         return dr1.pareigos.compareTo(dr2.pareigos)==0;
